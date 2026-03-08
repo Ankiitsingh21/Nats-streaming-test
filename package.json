@@ -5,7 +5,9 @@
   "main": "index.js",
   "scripts": {
     "publisher": "ts-node-dev --rs --notify  false src/publisher.ts",
-    "listener": "ts-node-dev --rs --notify false src/listener.ts"
+    "listener": "ts-node-dev --rs --notify false src/listener.ts",
+    "format": "prettier --write .",
+    "format:check": "prettier --check ."
   },
   "keywords": [],
   "author": "",
@@ -14,6 +16,7 @@
   "dependencies": {
     "@types/node": "^25.3.5",
     "node-nats-streaming": "^0.3.2",
+    "prettier": "^3.8.1",
     "ts-node-dev": "^2.0.0",
     "typescript": "^5.9.3"
   }
