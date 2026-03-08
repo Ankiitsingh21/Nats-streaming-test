@@ -1,16 +1,15 @@
-import { Message,Stan } from "node-nats-streaming";
+import { Message, Stan } from "node-nats-streaming";
 import { Subjects } from "./subject";
 
-interface Event{
-        subject: Subjects;
-        data:any;
+interface Event {
+  subject: Subjects;
+  data: any;
 }
 
-
-export abstract class Listener <T extends Event>  {
-  abstract subject: T['subject'];
+export abstract class Listener<T extends Event> {
+  abstract subject: T["subject"];
   abstract queueGroupName: string;
-  abstract onMessage(data: T['data'], msg: Message): void;
+  abstract onMessage(data: T["data"], msg: Message): void;
   private client: Stan;
   protected ackWait = 5 * 1000;
 
@@ -45,11 +44,6 @@ export abstract class Listener <T extends Event>  {
   parseMessage(msg: Message) {
     const data = msg.getData();
 
-    console.log("Raw message:", data);
-
-  if (!data) {
-    throw new Error("Received empty message from NATS");
-  }
     return typeof data === "string"
       ? JSON.parse(data)
       : JSON.parse(data.toString("utf-8"));
